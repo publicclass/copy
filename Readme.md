@@ -3,7 +3,7 @@
 
 [![Build Status](https://travis-ci.org/publicclass/copy.png?branch=master)](https://travis-ci.org/publicclass/copy)
 
-  Object properties copy supporting `date`, `regexp`, `array` and `object` types.
+  Recursively copies the properties of an object to another.
 
   The difference between this and [clone](https://github.com/component/clone) is that this one will copy any changes from one object to another without creating a new object. And thus is useful in memory-sensitive cases.
 
