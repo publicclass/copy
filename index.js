@@ -15,32 +15,34 @@ try {
  * Module exports.
  */
 
-module.exports = clone;
+module.exports = copy;
 
 /**
- * Clones objects.
+ * Copies the properties of `obj`.
  *
+ * @param {Mixed} any object
  * @param {Mixed} any object
  * @api public
  */
 
-function clone(obj){
+function copy(obj,to){
   switch (type(obj)) {
     case 'object':
-      var copy = {};
+      var c = type(to) == 'object' ? to : {};
       for (var key in obj) {
         if (obj.hasOwnProperty(key)) {
-          copy[key] = clone(obj[key]);
+          c[key] = copy(obj[key],c[key]);
         }
       }
-      return copy;
+      return c;
 
     case 'array':
-      var copy = new Array(obj.length);
+      var c = type(to) == 'array' ? to : [];
+      c.length = obj.length;
       for (var i = 0, l = obj.length; i < l; i++) {
-        copy[i] = clone(obj[i]);
+        c[i] = copy(obj[i],c[i]);
       }
-      return copy;
+      return c;
 
     case 'regexp':
       // from millermedeiros/amd-utils - MIT

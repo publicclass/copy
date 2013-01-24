@@ -1,5 +1,5 @@
 {
-  "name": "clone-component",
+  "name": "copy-component",
   "version": "0.1.0",
   "dependencies": {
     "type-component": "*"
@@ -10,7 +10,7 @@
   },
   "component": {
     "scripts": {
-      "clone/index.js": "index.js"
+      "copy/index.js": "index.js"
     }
   }
 }

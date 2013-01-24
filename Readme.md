@@ -1,27 +1,33 @@
 
-# clone
+# copy
 
-  Object clone supporting `date`, `regexp`, `array` and `object` types.
+  Object properties copy supporting `date`, `regexp`, `array` and `object` types.
+
+  The difference between this and [clone](https://github.com/component/clone) is that this one will copy any changes from one object to another without creating a new object. And thus is useful in memory-sensitive cases.
 
 ## Example
 
-```js
-var obj = clone({
-  a: 'b',
-  c: [
-    new Date(),
-    'tobi',
-    'jane'
-  ]
-})
-```
+    var obj = {
+      a: 'b',
+      c: [
+        new Date(),
+        'tobi',
+        'jane'
+      ]
+    }
+    var other = {
+      a: 'a'
+    }
+    copy(obj,other)
+
+    // other = {a: 'b', c: [...]}
 
 ## API
 
-### clone(obj)
+### copy(obj,to)
 
-  Clones `obj` recursively and returns it.
+  Copies all properties from `obj` recursively into `to`.
 
 ## License
 
-MIT
+  MIT
