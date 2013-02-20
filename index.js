@@ -22,16 +22,24 @@ module.exports = copy;
  *
  * @param {Mixed} any object
  * @param {Mixed} any object
+ * @param {Boolean} remove missing keys
  * @api public
  */
 
-function copy(obj,to){
+function copy(obj,to,clean){
   switch (type(obj)) {
     case 'object':
       var c = type(to) == 'object' ? to : {};
       for (var key in obj) {
         if (obj.hasOwnProperty(key)) {
-          c[key] = copy(obj[key],c[key]);
+          c[key] = copy(obj[key],c[key],clean);
+        }
+      }
+      if( clean ){
+        for (var key in c) {
+          if (c.hasOwnProperty(key) && !obj.hasOwnProperty(key)) {
+            delete c[key];
+          }
         }
       }
       return c;
@@ -40,7 +48,7 @@ function copy(obj,to){
       var c = type(to) == 'array' ? to : [];
       c.length = obj.length;
       for (var i = 0, l = obj.length; i < l; i++) {
-        c[i] = copy(obj[i],c[i]);
+        c[i] = copy(obj[i],c[i],clean);
       }
       return c;
 

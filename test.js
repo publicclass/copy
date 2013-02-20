@@ -69,6 +69,35 @@ describe('copy', function(){
       expect(to).to.equal(out)
     })
 
+    it('should remove with `clean`',function(){
+      var from = {
+        a: 1,
+        b: 2,
+        d:{
+          date: new Date(),
+          regex: /matcher/gm
+        }
+      }
+      var to = {
+        a: 'a',
+        b: 'b',
+        d: {
+          extra: {},
+          date: new Date(),
+          regex: /matcher/gm
+        }
+      }
+
+      copy(from,to,true)
+
+      expect(to).to.have.property('a',1)
+      expect(to).to.have.property('b',2)
+      expect(to).to.have.property('d')
+      expect(to.d).to.have.property('date')
+      expect(to.d).to.have.property('regex').eql(/matcher/gm)
+      expect(to.d).to.not.have.property('extra')
+    })
+
   })
 
   describe('without to',function(){
